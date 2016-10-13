@@ -1,0 +1,6 @@
+; UDS Scanner.def : 声明 DLL 的模块参数。
+
+LIBRARY
+
+EXPORTS
+    DS_Entry; 此处可以是显式导出

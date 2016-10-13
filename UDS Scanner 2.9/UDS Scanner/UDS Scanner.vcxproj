@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{77768023-97AF-430A-9A63-DF41284BAE5E}</ProjectGuid>
+    <RootNamespace>UDSScanner</RootNamespace>
+    <Keyword>MFCDLLProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <TargetExt>.ds</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <TargetExt>.ds</TargetExt>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\pub\external\include\;..\common;..;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ModuleDefinitionFile>.\UDS Scanner.def</ModuleDefinitionFile>
+      <OutputFile>$(OutDir)$(TargetName).ds</OutputFile>
+      <AdditionalLibraryDirectories>..\pub\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FreeImage.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>if NOT EXIST "$(ProjectDir)\..\pub\bin" mkdir "$(ProjectDir)\..\pub\bin"
+if NOT EXIST "c:\windows\twain_32\UDS Scanner" mkdir "c:\windows\twain_32\UDS Scanner"
+</Command>
+      <Message>如果pub文件夹不存在创建</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy "$(TargetPath)"  "c:\windows\twain_32\UDS Scanner"
+copy "$(ProjectDir)\..\pub\external\bin\FreeImage.dll" "c:\windows\twain_32\UDS Scanner"
+copy "$(ProjectDir)\..\pub\bin\TWAIN_logo.png" "c:\windows\twain_32\UDS Scanner"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>复制驱动到 windows\twain_32\UDS_Scanner 文件夹</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\pub\external\include\;..\common;..;.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <ModuleDefinitionFile>.\UDS Scanner.def</ModuleDefinitionFile>
+      <OutputFile>$(OutDir)$(TargetName).ds</OutputFile>
+      <AdditionalLibraryDirectories>..\pub\external\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>FreeImage.lib;mfcs100.lib;mfc100.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>mfcs100.lib;mfc100.lib</IgnoreSpecificDefaultLibraries>
+      <IgnoreAllDefaultLibraries>
+      </IgnoreAllDefaultLibraries>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <PreBuildEvent>
+      <Command>if NOT EXIST "$(ProjectDir)\..\pub\bin" mkdir "$(ProjectDir)\..\pub\bin"
+if NOT EXIST "c:\windows\twain_32\UDS Scanner" mkdir "c:\windows\twain_32\UDS Scanner"
+</Command>
+      <Message>如果pub文件夹不存在创建</Message>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>copy "$(TargetPath)"  "c:\windows\twain_32\UDS Scanner"
+copy "$(ProjectDir)\..\pub\external\bin\FreeImage.dll" "c:\windows\twain_32\UDS Scanner"
+copy "$(ProjectDir)\..\pub\bin\TWAIN_logo.png" "c:\windows\twain_32\UDS Scanner"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>复制驱动到 windows\twain_32\UDS Scanner 文件夹</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\UDSScanner.rc2" />
+    <None Include="UDS Scanner.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\common\CommonTWAIN.cpp" />
+    <ClCompile Include="..\common\CTiffWriter.cpp" />
+    <ClCompile Include="..\common\TwainString.cpp" />
+    <ClCompile Include="src\CommonDS.cpp" />
+    <ClCompile Include="src\CScanner_FreeImage.cpp" />
+    <ClCompile Include="src\CTWAINDS_Base.cpp" />
+    <ClCompile Include="src\CTWAINDS_FreeImage.cpp" />
+    <ClCompile Include="src\Dlg_Profile.cpp" />
+    <ClCompile Include="src\DSMInterface.cpp" />
+    <ClCompile Include="src\MFC_UI.cpp" />
+    <ClCompile Include="src\Page_About.cpp" />
+    <ClCompile Include="src\Page_Advanced.cpp" />
+    <ClCompile Include="src\Page_Base.cpp" />
+    <ClCompile Include="src\Sheet_Scanner.cpp" />
+    <ClCompile Include="src\TWAINContainer.cpp" />
+    <ClCompile Include="src\TWAINContainerBool.cpp" />
+    <ClCompile Include="src\TWAINContainerFix32.cpp" />
+    <ClCompile Include="src\TWAINContainerFix32Range.cpp" />
+    <ClCompile Include="src\TWAINContainerFrame.cpp" />
+    <ClCompile Include="src\TWAINContainerInt.cpp" />
+    <ClCompile Include="src\TWAINContainerString.cpp" />
+    <ClCompile Include="src\TWAIN_UI.cpp" />
+    <ClCompile Include="src\Win32.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="UDS Scanner.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\common\Common.h" />
+    <ClInclude Include="..\common\CommonTWAIN.h" />
+    <ClInclude Include="..\common\CTiffWriter.h" />
+    <ClInclude Include="..\common\twain.h" />
+    <ClInclude Include="..\common\TwainString.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="src\CommonDS.h" />
+    <ClInclude Include="src\CScanner_FreeImage.h" />
+    <ClInclude Include="src\CTWAINDS_Base.h" />
+    <ClInclude Include="src\CTWAINDS_FreeImage.h" />
+    <ClInclude Include="src\Dlg_Profile.h" />
+    <ClInclude Include="src\dllmain.h" />
+    <ClInclude Include="src\DSMInterface.h" />
+    <ClInclude Include="src\MFC_UI.h" />
+    <ClInclude Include="src\Page_About.h" />
+    <ClInclude Include="src\Page_Advanced.h" />
+    <ClInclude Include="src\Page_Base.h" />
+    <ClInclude Include="src\Sheet_Scanner.h" />
+    <ClInclude Include="src\TWAINContainer.h" />
+    <ClInclude Include="src\TWAINContainerBool.h" />
+    <ClInclude Include="src\TWAINContainerFix32.h" />
+    <ClInclude Include="src\TWAINContainerFix32Range.h" />
+    <ClInclude Include="src\TWAINContainerFrame.h" />
+    <ClInclude Include="src\TWAINContainerInt.h" />
+    <ClInclude Include="src\TWAINContainerString.h" />
+    <ClInclude Include="src\TWAIN_UI.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="UDS Scanner.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="UDS Scanner.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
