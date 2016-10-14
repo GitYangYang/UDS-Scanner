@@ -600,7 +600,7 @@ TW_INT16 CTWAINDS_FreeImage::Initialize()
 
   m_IndependantCapMap[ICAP_SUPPORTEDSIZES] = new CTWAINContainerInt(ICAP_SUPPORTEDSIZES, TWTY_UINT16, TWON_ENUMERATION);
   if( NULL == (pnCap = dynamic_cast<CTWAINContainerInt*>(m_IndependantCapMap[ICAP_SUPPORTEDSIZES]))
-   || !pnCap->Add(TWSS_NONE)
+   //|| !pnCap->Add(TWSS_NONE) //wan
    || !pnCap->Add(TWSS_USLETTER, true)
    || !pnCap->Add(TWSS_USLEGAL)
 	 || !pnCap->Add(TWSS_A4)  //wan

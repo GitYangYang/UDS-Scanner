@@ -114,7 +114,7 @@ CScanner_FreeImage::CScanner_FreeImage() :
 #endif
 
   SSNPRINTF(m_szSourceImagePath, sizeof(m_szSourceImagePath), PATH_MAX, "%s%cTWAIN_logo.png", szTWAIN_DS_DIR, PATH_SEPERATOR);
-	//::MessageBox(hwndDLG,m_szSourceImagePath,"UDS",MB_OK);
+	//::MessageBox(g_hwndDLG,m_szSourceImagePath,"UDS",MB_OK);
   // set default caps
   resetScanner();
 

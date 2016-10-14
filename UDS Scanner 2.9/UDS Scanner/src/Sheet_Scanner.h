@@ -20,7 +20,8 @@ public:
 
 protected:
 	DECLARE_MESSAGE_MAP()
-public:
+
+private:
 	MFC_UI *m_pUI;
 
 public:

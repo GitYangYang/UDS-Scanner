@@ -37,6 +37,7 @@ BEGIN_MESSAGE_MAP(CPage_Advanced, CPropertyPage)
 	ON_CBN_SELCHANGE(IDC_ADVANCED_COMBO_ORIENTATION, &CPage_Advanced::OnCbnSelchangeAdvanced_Combo_Orientation)
 	ON_CBN_SELCHANGE(IDC_ADVANCED_COMBO_UINTS, &CPage_Advanced::OnCbnSelchangeAdvanced_Combo_Uints)
 	//ON_EN_CHANGE(IDC_ADVANCED_EDIT_CUSTOMWIDTH, &CPage_Advanced::OnEnChangeAdvanced_Edit_Customwidth)
+	//ON_EN_CHANGE(IDC_ADVANCED_EDIT_CUSTOMHEIGHT, &CPage_Advanced::OnEnChangeAdvanced_Edit_Customheight)
 END_MESSAGE_MAP()
 
 void CPage_Advanced::UpdateControls(void)
@@ -78,9 +79,9 @@ void CPage_Advanced::UpdateControls(void)
 	{
 		switch(lstCapValues->at(i))
 		{
-		case TWSS_NONE:
+		/*case TWSS_NONE:
 			m_combo_standardsizes.InsertString(i,"自定义");
-			break;
+			break;*/
 		case TWSS_USLETTER:
 			m_combo_standardsizes.InsertString(i,"US Letter (8.5\" x 11\")");  //216mm x 280mm
 			break;
@@ -99,7 +100,7 @@ void CPage_Advanced::UpdateControls(void)
 	}
 	m_combo_standardsizes.SetCurSel(nCapIndex);  ///< 显示默认值
 
-	if (TWSS_NONE == lstCapValues->at(nCapIndex))  ///<　纸张大小：自定义。控件不可用
+	/*if (TWSS_NONE == lstCapValues->at(nCapIndex))  ///<　纸张大小：自定义。
 	{
 		m_edit_custom_width.EnableWindow(TRUE);
 		m_edit_custom_height.EnableWindow(TRUE);
@@ -107,16 +108,16 @@ void CPage_Advanced::UpdateControls(void)
 		GetDlgItem(IDC_ADVANCED_STATIC_CUSTOM_WIDTH)->EnableWindow(TRUE);
 		GetDlgItem(IDC_ADVANCED_STATIC_CUSTOM_HEIGHT)->EnableWindow(TRUE);
 		GetDlgItem(IDC_ADVANCED_STATIC_ORIENTATION)->EnableWindow(FALSE);
-	} 
-	else
-	{
+	} */
+	/*else
+	{*/
 		m_edit_custom_width.EnableWindow(FALSE);
 		m_edit_custom_height.EnableWindow(FALSE);
 		m_combo_orientation.EnableWindow(TRUE);
 		GetDlgItem(IDC_ADVANCED_STATIC_CUSTOM_WIDTH)->EnableWindow(FALSE);
 		GetDlgItem(IDC_ADVANCED_STATIC_CUSTOM_HEIGHT)->EnableWindow(FALSE);
 		GetDlgItem(IDC_ADVANCED_STATIC_ORIENTATION)->EnableWindow(TRUE);
-	}
+	/*}*/
 
 
 	/**
@@ -192,11 +193,11 @@ void CPage_Advanced::OnCbnSelchangeAdvanced_Combo_Standardsizes()
 	m_combo_standardsizes.GetLBText( nIndex, strCBText);
 	int nval;
 	//int nval = _ttoi(strCBText);  ///< Cstring 转 int
-	if (strCBText.Find("自定义") >= 0)
+	/*if (strCBText.Find("自定义") >= 0)
 	{
-		nval = TWSS_NONE;
+	nval = TWSS_NONE;
 	}
-	else if (strCBText.Find("US Letter") >= 0)
+	else*/ if (strCBText.Find("US Letter") >= 0)
 	{
 		nval = TWSS_USLETTER;
 	}
@@ -237,7 +238,7 @@ void CPage_Advanced::OnCbnSelchangeAdvanced_Combo_Orientation()
 	{
 		nval = TWOR_LANDSCAPE;
 	}
-	m_pUI->SetCapValueFloat(ICAP_ORIENTATION,(float)nval);	
+	m_pUI->SetCapValueInt(ICAP_ORIENTATION,nval);	
 	UpdateControls(); 
 }
 
@@ -290,12 +291,29 @@ void CPage_Advanced::OnCbnSelchangeAdvanced_Combo_Uints()
 //	// 函数并调用 CRichEditCtrl().SetEventMask()，
 //	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
 //
+//	// todo:  在此添加控件通知处理程序代码
+//	CString strWidth,strHeight;
+//	m_edit_custom_width.GetWindowText(strWidth);
+//	m_edit_custom_height.GetWindowText(strHeight);
+//	float fW = (float)_ttof(strWidth);  // CString -> float
+//	float fH = (float)_ttof(strHeight); 
+//	m_pUI->SetCurrentFrame(0.0f,0.0f,fH,fW);
+////	UpdateControls(); 
+//}
+//
+//
+//void CPage_Advanced::OnEnChangeAdvanced_Edit_Customheight()
+//{
+//	// TODO:  如果该控件是 RICHEDIT 控件，它将不
+//	// 发送此通知，除非重写 CPropertyPage::OnInitDialog()
+//	// 函数并调用 CRichEditCtrl().SetEventMask()，
+//	// 同时将 ENM_CHANGE 标志“或”运算到掩码中。
+//
 //	// TODO:  在此添加控件通知处理程序代码
 //	CString strWidth,strHeight;
 //	m_edit_custom_width.GetWindowText(strWidth);
 //	m_edit_custom_height.GetWindowText(strHeight);
-//	float fW = _ttof(strWidth);  // CString -> float
-//	float fH = _ttof(strHeight); 
+//	float fW = (float)_ttof(strWidth);  // CString -> float
+//	float fH = (float)_ttof(strHeight); 
 //	m_pUI->SetCurrentFrame(0.0f,0.0f,fH,fW);
-//	UpdateControls(); 
 //}

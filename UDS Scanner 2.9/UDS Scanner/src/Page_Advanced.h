@@ -60,5 +60,6 @@ private:
 	afx_msg void OnCbnSelchangeAdvanced_Combo_Orientation();
 	afx_msg void OnCbnSelchangeAdvanced_Combo_Uints();
 
-	//afx_msg void OnEnChangeAdvanced_Edit_Customwidth();
+	/*afx_msg void OnEnChangeAdvanced_Edit_Customwidth();
+	afx_msg void OnEnChangeAdvanced_Edit_Customheight();*/
 };
